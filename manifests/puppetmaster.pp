@@ -70,7 +70,7 @@ file { '/etc/puppetlabs/r10k':
   }
 file {'/etc/puppetlabs/r10k/r10k.yaml':
   ensure  => file,
-  content => template('start_master/etc/puppetlabs/r10k/r10k.yaml.erb'),
+  content => template('utilities/etc/puppetlabs/r10k/r10k.yaml.erb'),
   owner   => 'root',
   group   => 'root',
   }
@@ -101,7 +101,7 @@ file {'/etc/puppetlabs/www':
 file {'/etc/puppetlabs/www/client.php':
   ensure  => file,
   mode    => '0555',
-  content => epp('start_master/etc/puppetlabs/www/client.php.epp'),
+  content => epp('utilities/etc/puppetlabs/www/client.php.epp'),
   require => File['/etc/puppetlabs/www'],
 }
 include nginx
