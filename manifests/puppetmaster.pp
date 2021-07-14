@@ -92,7 +92,6 @@ file {'/etc/puppetlabs/eyaml/keys/public_key.pkcs7.pem':
 }->
 exec { 'deploy environments':
   command => '/opt/puppetlabs/puppet/bin/r10k deploy environment -p',
-  require => Exec['install_r10k_gem'],
   }
 file {'/etc/puppetlabs/www':
   ensure => directory,
