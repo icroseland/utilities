@@ -17,7 +17,7 @@ if ($puppetdb_server != $::fqdn) and ($postgresql_server == $::fqdn ){
     manage_firewall => false,
     }
 }
-if ($puppetdb_server == $::fqdn) and ($postgresql_server =! $::fqdn ){
+if ($puppetdb_server == $::fqdn) and ($postgresql_server != $::fqdn ){
   class { 'puppetdb::server':
     database_host => $postgres_server,
     postgresql_ssl_on => true,
