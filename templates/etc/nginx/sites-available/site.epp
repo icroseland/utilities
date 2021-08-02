@@ -1,0 +1,31 @@
+#managed by puppet
+
+<%- | String $site_name,
+      String $listen_port,
+      String $access_log,
+      String $error_log,
+      String $ssl,
+      String $ssl_certificate,
+      String $ssl_certificate_key,
+      Array  $locations_hash
+| -%>
+
+
+
+server {
+  server_name         <%= $site_name %>;
+  access_log          <%= $access_log %> combined;
+  error_log           <%= $error_log %>;
+  listen              <%= $listen_port %>;
+  ssl                 <%= $ssl %>;
+  ssl_certificate     <%= $ssl_certificate %>;
+  ssl_certificate_key <%= $ssl_certificate_key %>;
+
+<% $locations.each |$location| { -%>
+
+  location <%= $location[name] -%> {
+  <% $location.each |$config| { -%>
+    <%= $config.key -%>  "<%= $config.data -%>"
+    <% } -%>
+    <% } -%>
+}
