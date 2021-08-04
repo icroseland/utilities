@@ -47,7 +47,7 @@ if $my_cert_check {
     group  => 'root',
     mode   => '0644',
     source => 'puppet:///modules/utilities/etc/yum.repos.d/nginx.repo',
-    }->
+    }
   include nginx
   }
 # setup the nginx allowed user files for pam.d
