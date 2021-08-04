@@ -54,7 +54,7 @@ echo("#disable selinux as its an annoyance for a demo right now.\n");
 echo("/usr/sbin/setenforce 0\n");
 echo("yum install puppet-agent -y\n");
 echo("fi\n");
-echo("if [ \$DIST_VER == 'Ubuntu' ]\n");
+echo("if [ \$DIST_VER == 'Ubuntu' ]||[ \$DIST_VER == 'Debian GNU/Linux' ]\n");
 echo("then\n");
 echo("apt-get install wget -y\n");
 echo("apt-get install git  -y\n");
