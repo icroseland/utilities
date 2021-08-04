@@ -46,7 +46,7 @@ file { '/etc/nginx/pam_users':
   ensure  => 'directory',
   owner   => 'root',
   group   => 'root',
-  mode    => '0644'
+  mode    => '0644',
   require => Package['nginx'],
   }
 $pam_users.each |String $pam_user| {
