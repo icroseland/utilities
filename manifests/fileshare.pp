@@ -66,4 +66,10 @@ $pam_users.each |String $pam_user| {
     content => $pam_user,
     require => File['/etc/nginx/pam_users']
     }
-    }
+  }
+package { 'libnginx-mod-http-auth-pam':
+  ensure => 'present',
+  notify => Service["nginx::service::${::nginx::service_name}"]
+  }
+
+}
