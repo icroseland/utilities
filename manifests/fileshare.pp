@@ -22,12 +22,19 @@ if $my_cert_check {
   } else {
   include vsftpd
 
-  file { '/etc/vsftpd/vsftpd_user_conf':
+  file { '/etc/vsftpd':
     ensure  => 'directory',
     owner   => 'root',
     group   => 'root',
     mode    => '0755',
     require => Package['vsftpd'],
+    }
+  file { '/etc/vsftpd/vsftpd_user_conf':
+    ensure  => 'directory',
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0755',
+    require => File['/etc/vsftpd'],
     }
   $vsftpd_user_conf.each |String $user_conf|{
     file {"/etc/vsftpd/vsftpd_user_conf/${user_conf}":
