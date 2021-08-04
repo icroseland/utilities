@@ -22,7 +22,7 @@ echo("PROFILE='$profile'\n");
 echo("COLLECTION='$collection'\n");
 echo("APPLICATION='$application'\n");
 echo("ENVIRONMENT='$environment'\n");
-echo("DIST_VER=`cat /etc/[A-Za-z]*[_-][rv]e[lr]* | grep -E "^NAME=" | grep -o -P '(?<=").*?(?=")'`")
+echo("DIST_VER=`cat /etc/[A-Za-z]*[_-][rv]e[lr]* | grep -E \"^NAME=\" | grep -o -P '(?<=\").*?(?=\")'`");
 echo("\n");
 echo("IFS=' '\n");
 echo("read -ra ARGS <<< \"\$@\"\n");
@@ -45,7 +45,7 @@ echo("            ;;\n");
 echo("        esac\n");
 echo("done\n");
 
-echo("if [ \$DIST_VER == 'CentOS Linux']\n");
+echo("if [ \$DIST_VER == 'CentOS Linux' ]\n");
 echo("then\n");
 echo("yum install wget -y\n");
 echo("yum install git -y\n");
@@ -54,7 +54,7 @@ echo("#disable selinux as its an annoyance for a demo right now.\n");
 echo("/usr/sbin/setenforce 0\n");
 echo("yum install puppet-agent -y\n");
 echo("fi\n");
-echo("if [ \$DIST_VER == 'Ubuntu']\n");
+echo("if [ \$DIST_VER == 'Ubuntu' ]||[ \$DIST_VER == 'Debian GNU/Linux' ]\n");
 echo("then\n");
 echo("apt-get install wget -y\n");
 echo("apt-get install git  -y\n");
