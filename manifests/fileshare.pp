@@ -23,10 +23,11 @@ if $my_cert_check {
   include vsftpd
 
   file { '/etc/vsftpd/vsftpd_user_conf':
-    ensure => 'directory',
-    owner  => 'root',
-    group  => 'root',
-    mode   => '0755',
+    ensure  => 'directory',
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0755',
+    require => Package['vsftpd'],
     }
   $vsftpd_user_conf.each |String $user_conf|{
     file {"/etc/vsftpd/vsftpd_user_conf/${user_conf}":
@@ -35,27 +36,18 @@ if $my_cert_check {
       group   => 'root',
       mode    => '0644',
       content => 'local_root=/data/ftp/',
+      require => Package['vsftpd'],
       }
       }
-  # we need to be kind of hardcore and use the nginx from nginx instead of redhats..
-  package { 'yum-utils':
-    ensure => 'installed'
-    }->
-  file { '/etc/yum.repos.d/nginx.repo':
-    ensure => 'file',
-    owner  => 'root',
-    group  => 'root',
-    mode   => '0644',
-    source => 'puppet:///modules/utilities/etc/yum.repos.d/nginx.repo',
-    }
-  include nginx
+include nginx
   }
 # setup the nginx allowed user files for pam.d
 file { '/etc/nginx/pam_users':
-  ensure => 'directory',
-  owner  => 'root',
-  group  => 'root',
-  mode   => '0644'
+  ensure  => 'directory',
+  owner   => 'root',
+  group   => 'root',
+  mode    => '0644'
+  require => Package['nginx'],
   }
 $pam_users.each |String $pam_user| {
   file {"/etc/nginx/pam_users/${pam_user}.allowed":
@@ -64,12 +56,12 @@ $pam_users.each |String $pam_user| {
     group   => 'root',
     mode    => '0644',
     content => $pam_user,
-    require => File['/etc/nginx/pam_users']
+    require => File['/etc/nginx/pam_users'],
     }
   }
 package { 'libnginx-mod-http-auth-pam':
   ensure => 'present',
-  notify => Service["${::nginx::service_name}"]
+  notify => Service["${::nginx::service_name}"],
   }
 
 }
