@@ -69,7 +69,7 @@ $pam_users.each |String $pam_user| {
   }
 package { 'libnginx-mod-http-auth-pam':
   ensure => 'present',
-  notify => Service["nginx::service::${::nginx::service_name}"]
+  notify => Service["${::nginx::service_name}"]
   }
 
 }
