@@ -42,7 +42,7 @@ if $distro == 'Debian' {
   $puser = 'www-data'
   $pgroup = 'www-data' 
 }
-if $puppetdb_server == $::fqdn {
+if $puppetdb_server == $fqdn {
   class { 'utilities::db_setup': }
 }->
 class { '::puppet':
