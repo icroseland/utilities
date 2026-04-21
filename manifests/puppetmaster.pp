@@ -8,7 +8,7 @@ class utilities::puppetmaster(
 $user = 'puppet',
 $group = 'puppet',
 $ip = $facts['networking']['ip'],
-$fqdn = $facts['networking']['fqdn']
+$fqdn = $facts['networking']['fqdn'],
 $environment = 'production',
 $r10k_name = 'puppet',
 $r10k_remote = 'https://github.com/icroseland/demo-control.git',
