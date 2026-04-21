@@ -1,12 +1,14 @@
 # @setup puppetdb and inform the master
-class utilities::puppetdb(){
+class utilities::puppetdb(
+$fqdn = $facts['networking']['fqdn'],
+){
 class { 'puppetdb': }
 @@ini_setting { 'puppetdb_host':
   ensure            => present,
   path              => '/etc/facter/facts.d/puppetmaster.txt',
   key_val_seperator => '=',
   setting           => 'puppetdb_host',
-  value             => $::fqdn
+  value             => $fqdn
   }
 @@ini_setting { 'server_reports':
   ensure            => present,

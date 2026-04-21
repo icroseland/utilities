@@ -1,7 +1,7 @@
 # install puppdb and postgres
 #
 class utilities::db_setup(
-$fqdn = $facts['networking']['fqdn']
+$fqdn = $facts['networking']['fqdn'],
 $puppetdb_server = $fqdn,
 $postgresql_server = $fqdn
 ){
