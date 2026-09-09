@@ -1,4 +1,4 @@
-# @summary A short summary of the purpose of this class
+ # @summary A short summary of the purpose of this class
 #
 # A description of what this class does
 #
@@ -92,7 +92,7 @@ file {'/etc/puppetlabs/eyaml/keys/public_key.pkcs7.pem':
 }->
 exec { 'deploy environments':
   command => '/opt/puppetlabs/puppet/bin/r10k deploy environment -p',
-  require => Exec['install_r10k_gem'],
+  require => Exec['start_master::setup_master::install_r10k_gem'],
   }
 file {'/etc/puppetlabs/www':
   ensure => directory,
